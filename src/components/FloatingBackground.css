@@ -1,0 +1,474 @@
+/* Decorative hero: gradiente + silhuetas do kit (sem blobs/anéis orgânicos) */
+
+.floating-bg-root {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Lavanda → branco, um pouco mais saturado / com mais paradas para o degradê “ler” melhor */
+  background: linear-gradient(
+    165deg,
+    #ede6f4 0%,
+    #f3eef9 24%,
+    #f9f6fc 52%,
+    #ffffff 100%
+  );
+}
+
+/* Optional: full-viewport layer (spec); use variant="viewport" on <FloatingBackground /> */
+.floating-bg-root.floating-bg-root--viewport {
+  position: fixed;
+}
+
+/**
+ * Hero: only the abstract UX silhouettes are clipped to this band (no mask; hard clip).
+ * O gradiente usa `.floating-bg-root` em largura total (ver FloatingBackground.tsx).
+ */
+.floating-bg-hero-ui-slot {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 26%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .floating-bg-hero-ui-slot {
+    inset: 0 0 0 44%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .floating-bg-hero-ui-slot {
+    /* Um pouco mais à direita: menos peça “por baixo” do copy da hero */
+    inset: 0 0 0 50%;
+  }
+}
+
+/* Silhuetas “UI kit” (sem texto/ícones): referência visual suave */
+
+@keyframes floating-bg-ui-float-1 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(5px, -7px, 0) rotate(0.65deg);
+  }
+}
+
+@keyframes floating-bg-ui-float-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-5px, 6px, 0) rotate(-0.55deg);
+  }
+}
+
+@keyframes floating-bg-ui-float-3 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3px, -5px, 0) scale(1.01);
+  }
+}
+
+@keyframes floating-bg-ui-breathe {
+  0%,
+  100% {
+    opacity: 0.38;
+  }
+  50% {
+    opacity: 0.62;
+  }
+}
+
+.floating-bg-ui {
+  position: absolute;
+  will-change: transform, opacity;
+}
+
+/*
+ * Silhuetas em duas colunas (% do slot), faixas verticais sem cruzamento.
+ * Esquerda: cartão → ícones → feature → busca+pills. Direita: media → tabs → produto.
+ */
+
+.floating-bg-ui--1 {
+  left: 4%;
+  top: 6%;
+  animation:
+    floating-bg-ui-float-1 12s ease-in-out infinite,
+    floating-bg-ui-breathe 9s ease-in-out infinite;
+  animation-delay: 0.3s, 0.8s;
+}
+
+.floating-bg-ui--2 {
+  right: 4%;
+  top: 6%;
+  animation:
+    floating-bg-ui-float-2 14s ease-in-out infinite,
+    floating-bg-ui-breathe 11s ease-in-out infinite;
+  animation-delay: 1.1s, 0.2s;
+}
+
+.floating-bg-ui--3 {
+  /* Mais à direita: folga em relação ao bloco de texto da hero (fora do slot) */
+  left: 22%;
+  top: 30%;
+  animation:
+    floating-bg-ui-float-3 13s ease-in-out infinite,
+    floating-bg-ui-breathe 10s ease-in-out infinite;
+  animation-delay: 2.4s, 1.5s;
+}
+
+@media (min-width: 640px) {
+  .floating-bg-ui--3 {
+    left: 26%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .floating-bg-ui--3 {
+    left: 30%;
+  }
+}
+
+.floating-bg-ui--4 {
+  left: 4%;
+  top: 21%;
+  animation:
+    floating-bg-ui-float-1 11s ease-in-out infinite reverse,
+    floating-bg-ui-breathe 12s ease-in-out infinite;
+  animation-delay: 0.7s, 2.1s;
+}
+
+.floating-bg-ui--5 {
+  left: 4%;
+  top: 64%;
+  animation:
+    floating-bg-ui-float-2 15s ease-in-out infinite,
+    floating-bg-ui-breathe 8s ease-in-out infinite;
+  animation-delay: 1.9s, 0.4s;
+}
+
+.floating-bg-ui--6 {
+  right: 4%;
+  top: 30%;
+  animation:
+    floating-bg-ui-float-3 10s ease-in-out infinite,
+    floating-bg-ui-breathe 13s ease-in-out infinite;
+  animation-delay: 3.1s, 1.2s;
+}
+
+.floating-bg-ui--7 {
+  right: 4%;
+  top: 62%;
+  animation:
+    floating-bg-ui-float-2 11.5s ease-in-out infinite,
+    floating-bg-ui-breathe 10s ease-in-out infinite;
+  animation-delay: 0.5s, 2.3s;
+}
+
+@media (max-width: 639px) {
+  .floating-bg-ui--1 {
+    left: 3%;
+    top: 4%;
+  }
+
+  .floating-bg-ui--2 {
+    right: 3%;
+    top: 4%;
+  }
+
+  .floating-bg-ui--4 {
+    left: 3%;
+    top: 19%;
+  }
+
+  .floating-bg-ui--6 {
+    right: 3%;
+    top: 26%;
+  }
+
+  .floating-bg-ui--3 {
+    left: 18%;
+    top: 33%;
+  }
+
+  .floating-bg-ui--7 {
+    right: 3%;
+    top: 54%;
+  }
+
+  .floating-bg-ui--5 {
+    left: 3%;
+    top: auto;
+    bottom: 5%;
+    width: max-content;
+    max-width: calc(100% - 6%);
+  }
+}
+
+.floating-bg-ui-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.floating-bg-ui-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Cartão com “linhas” abstratas */
+.floating-bg-ghost-card {
+  width: min(200px, 28vw);
+  padding: 14px 16px 16px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(124, 63, 171, 0.14);
+  box-shadow: 0 10px 40px -28px rgba(92, 45, 126, 0.35);
+}
+
+.floating-bg-ghost-card__bar {
+  height: 8px;
+  border-radius: 6px;
+  background: rgba(92, 45, 126, 0.12);
+  width: 55%;
+  margin-bottom: 10px;
+}
+
+.floating-bg-ghost-card__line {
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(92, 45, 126, 0.08);
+  margin-bottom: 6px;
+}
+
+.floating-bg-ghost-card__line--short {
+  width: 72%;
+}
+
+.floating-bg-ghost-card__line--shorter {
+  width: 48%;
+}
+
+/* Barra estilo player / progresso */
+.floating-bg-ghost-media {
+  width: min(240px, 34vw);
+  padding: 12px 14px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(124, 63, 171, 0.12);
+}
+
+.floating-bg-ghost-media__title {
+  height: 7px;
+  width: 40%;
+  border-radius: 4px;
+  background: rgba(92, 45, 126, 0.14);
+  margin-bottom: 8px;
+}
+
+.floating-bg-ghost-media__track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(92, 45, 126, 0.1);
+  margin: 10px 0 12px;
+  position: relative;
+}
+
+.floating-bg-ghost-media__thumb {
+  position: absolute;
+  left: 38%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: rgba(124, 63, 171, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.floating-bg-ghost-media__controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.floating-bg-ghost-media__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(124, 63, 171, 0.22);
+}
+
+/* Mini cartão com “thumb” */
+.floating-bg-ghost-feature {
+  width: min(160px, 24vw);
+  padding: 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(124, 63, 171, 0.12);
+}
+
+.floating-bg-ghost-feature__thumb {
+  width: 100%;
+  aspect-ratio: 1.15;
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(124, 63, 171, 0.28), rgba(176, 126, 212, 0.18));
+  margin-bottom: 10px;
+}
+
+.floating-bg-ghost-feature__btn {
+  height: 22px;
+  width: 52%;
+  border-radius: 999px;
+  background: rgba(124, 63, 171, 0.35);
+  margin-top: 8px;
+}
+
+/* Círculos tipo botões de ícone */
+.floating-bg-ghost-icon-row {
+  display: flex;
+  gap: 10px;
+}
+
+.floating-bg-ghost-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(124, 63, 171, 0.16);
+  box-shadow: 0 4px 14px -8px rgba(92, 45, 126, 0.25);
+}
+
+.floating-bg-ghost-icon--accent {
+  background: rgba(124, 63, 171, 0.12);
+}
+
+/* Par de pílulas (primário + fantasma) */
+.floating-bg-ghost-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.floating-bg-ghost-pill {
+  height: 28px;
+  min-width: 72px;
+  padding: 0 14px;
+  border-radius: 999px;
+}
+
+.floating-bg-ghost-pill--solid {
+  background: rgba(124, 63, 171, 0.38);
+  border: 1px solid rgba(92, 45, 126, 0.12);
+}
+
+.floating-bg-ghost-pill--ghost {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(124, 63, 171, 0.2);
+}
+
+/* Campo busca */
+.floating-bg-ghost-search {
+  width: min(220px, 32vw);
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(124, 63, 171, 0.14);
+}
+
+.floating-bg-ghost-search__inner {
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(149, 96, 200, 0.1);
+  border: 1px solid rgba(124, 63, 171, 0.08);
+}
+
+/* Tab bar */
+.floating-bg-ghost-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(124, 63, 171, 0.12);
+}
+
+.floating-bg-ghost-tab {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(149, 96, 200, 0.1);
+}
+
+.floating-bg-ghost-tab--active {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(124, 63, 171, 0.12);
+  box-shadow: 0 -2px 8px -4px rgba(92, 45, 126, 0.15);
+}
+
+/* Toggle */
+.floating-bg-ghost-toggle {
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(124, 63, 171, 0.32);
+  position: relative;
+  border: 1px solid rgba(92, 45, 126, 0.08);
+}
+
+.floating-bg-ghost-toggle__knob {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 4px rgba(92, 45, 126, 0.15);
+}
+
+.floating-bg-ghost-toggle--off {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(124, 63, 171, 0.16);
+}
+
+.floating-bg-ghost-toggle--off .floating-bg-ghost-toggle__knob {
+  left: auto;
+  right: 4px;
+  background: rgba(149, 96, 200, 0.2);
+}
+
+/* Cartão vertical “produto” */
+.floating-bg-ghost-product {
+  width: min(140px, 22vw);
+  padding: 10px 10px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(124, 63, 171, 0.12);
+}
+
+.floating-bg-ghost-product__hero {
+  aspect-ratio: 1.05;
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(124, 63, 171, 0.32), rgba(176, 126, 212, 0.2));
+  margin-bottom: 10px;
+}
+
+.floating-bg-ghost-product__cta {
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(124, 63, 171, 0.36);
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="di-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3560"/>
+      <stop offset="50%" stop-color="#79538e"/>
+      <stop offset="100%" stop-color="#a889bc"/>
+    </linearGradient>
+    <radialGradient id="di-glow" cx="80%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#di-bg)"/>
+  <rect width="1200" height="800" fill="url(#di-glow)"/>
+  <rect x="96" y="480" width="320" height="14" rx="7" fill="#ffffff" fill-opacity="0.2"/>
+  <rect x="96" y="514" width="220" height="14" rx="7" fill="#ffffff" fill-opacity="0.12"/>
+  <rect x="96" y="556" width="260" height="10" rx="5" fill="#ffffff" fill-opacity="0.1"/>
+</svg>

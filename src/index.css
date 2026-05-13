@@ -1,0 +1,172 @@
+@import 'tailwindcss';
+
+/* Garante a cor primária em todo o design system (Tailwind v4 + PostCSS) */
+@theme {
+  --color-primary: #79538e;
+}
+
+/* Global base tweaks (minimal; let Tailwind do the heavy lifting) */
+:root {
+  /*
+   * Accent (--color-accent): warm muted gold, complementary to --color-primary (#79538e).
+   * Use only for emphasis — not for page/section backgrounds or replacing existing tokens.
+   *
+   * Apply to:
+   *   - Interactive hover: border-color, outline, text-decoration-color, underline, icon stroke/fill on hover
+   *   - Active / aria-current / selected controls: rings, borders, or indicator bars
+   *   - Focus-visible: outline or focus ring color where a distinct accent is desired
+   *   - CTAs: outer glow, border, text/icon color on secondary/outline buttons (not the main fill)
+   *   - Badges/pills/chips: border or label color; avoid solid fills that read as a second background
+   *   - Charts, progress, or decorative strokes that need a highlight distinct from primary purple
+   *
+   * Avoid:
+   *   - Large background areas (hero, cards, body)
+   *   - Replacing values already mapped to --color-primary or other existing palette tokens
+   */
+  --color-accent: #c4a052;
+
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+}
+
+/* Molduras: imagem como bloco evita a “fenda” de alinhamento inline sob a moldura */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(121, 83, 142, 0.28);
+}
+
+/* Página de projeto narrativo: seleção usa a mesma accent que o card (vars no <article>). */
+.case-study-narrative-page ::selection {
+  background: rgb(var(--cs-accent-rgb) / 0.28);
+}
+
+/**
+ * Card Contato: mesma família cromática do hero (#FloatingBackground) e lavanda suave,
+ * com camadas animadas discretas (brilho que desloca e halo radial).
+ */
+.contact-card-surface {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(165deg, #ede6f4 0%, #f6f2fb 38%, #ffffff 100%);
+}
+
+.contact-card-surface::before {
+  content: '';
+  position: absolute;
+  inset: -35% -25%;
+  z-index: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(121, 83, 142, 0.18) 0%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(121, 83, 142, 0.09) 100%
+  );
+  animation: contact-card-sheen 18s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.contact-card-surface::after {
+  content: '';
+  position: absolute;
+  right: -12%;
+  top: -25%;
+  z-index: 0;
+  width: 58%;
+  height: 85%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(121, 83, 142, 0.13) 0%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  animation: contact-card-glow 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes contact-card-sheen {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(2.5%, 2%) scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes contact-card-glow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-3%, 4%) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-card-surface::before,
+  .contact-card-surface::after {
+    animation: none;
+  }
+}
+
+/* Scroll no estilo macOS/iOS: thumb fino, arredondado, trilho discreto, sem setas (WebKit) */
+.scroll-apple {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.scroll-apple::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.scroll-apple::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-apple::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scroll-apple::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.scroll-apple::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.scroll-apple::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
