@@ -672,9 +672,9 @@ function PortfolioHeader({
         </Link>
         <nav className="hidden items-center gap-0.5 sm:flex" aria-label="Principal">
           <NavLink to="/#projetos">Projetos</NavLink>
-          <NavLink to="/#sobre">Sobre</NavLink>
           <NavLink to="/#abordagem">Abordagem</NavLink>
           <NavLink to="/#processo">Processo</NavLink>
+          <NavLink to="/#sobre">Sobre</NavLink>
           <NavLink to="/#contato">Contato</NavLink>
         </nav>
         <div className="flex items-center gap-2">
@@ -771,6 +771,70 @@ function HomePage() {
           </Container>
         </section>
 
+        <section
+          id="abordagem"
+          className={sectionPaddingYCompact}
+        >
+          <Container>
+            <Reveal>
+              <h2 className="sr-only">Abordagem</h2>
+              <SectionHeading
+                eyebrow="ABORDAGEM"
+                subtitle="Combino UX Thinking com estratégia de produto para criar soluções escaláveis que resolvem necessidades reais dos usuários, estão alinhadas aos objetivos do negócio e são feitas para funcionar de verdade e não apenas para ficar bonitas no Figma. Sem enrolação. Sem over-design. Apenas soluções bem pensadas, testadas e que funcionam."
+                subtitleFullWidth
+              />
+            </Reveal>
+            <div className={cn(gapAfterSectionHeading, 'grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6')}>
+              {approachItems.map((item, i) => {
+                const Icon = approachIconById[item.icon]
+                const style = approachCardStyles[i % approachCardStyles.length]
+                return (
+                  <Reveal key={item.title}>
+                    <motion.div
+                      className={cn(
+                        'flex h-full items-center gap-5 rounded-2xl p-7 transition duration-300 hover:-translate-y-1 sm:gap-6 sm:p-8',
+                        style.surface,
+                      )}
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.3, ease: easeOut }}
+                    >
+                      <div
+                        className={cn(
+                          'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl',
+                          style.icon,
+                        )}
+                        aria-hidden
+                      >
+                        <Icon className="h-6 w-6" strokeWidth={1.65} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-['Montserrat'] text-[17px] font-semibold tracking-[-0.02em] text-black sm:text-[18px]">
+                          {item.title}
+                        </h3>
+                        <p className="mt-3 text-pretty text-[14px] leading-relaxed text-black/70">{item.text}</p>
+                      </div>
+                    </motion.div>
+                  </Reveal>
+                )
+              })}
+            </div>
+          </Container>
+        </section>
+
+        <section id="processo" className={sectionPaddingYCompact}>
+          <Container>
+            <Reveal>
+              <h2 className="sr-only">Processo</h2>
+              <SectionHeading
+                eyebrow="PROCESSO"
+                subtitle="Um fluxo enxuto que se adapta ao tamanho do risco. Mais profundidade quando precisa, mais velocidade quando dá."
+                subtitleFullWidth
+              />
+            </Reveal>
+            <ProcessTimeline />
+          </Container>
+        </section>
+
         <section id="sobre" className={sectionPaddingY}>
           <Container>
             <Reveal>
@@ -855,70 +919,6 @@ function HomePage() {
         </section>
 
         <section
-          id="abordagem"
-          className={sectionPaddingYCompact}
-        >
-          <Container>
-            <Reveal>
-              <h2 className="sr-only">Abordagem</h2>
-              <SectionHeading
-                eyebrow="ABORDAGEM"
-                subtitle="Combino UX Thinking com estratégia de produto para criar soluções escaláveis que resolvem necessidades reais dos usuários, estão alinhadas aos objetivos do negócio e são feitas para funcionar de verdade e não apenas para ficar bonitas no Figma. Sem enrolação. Sem over-design. Apenas soluções bem pensadas, testadas e que funcionam."
-                subtitleFullWidth
-              />
-            </Reveal>
-            <div className={cn(gapAfterSectionHeading, 'grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6')}>
-              {approachItems.map((item, i) => {
-                const Icon = approachIconById[item.icon]
-                const style = approachCardStyles[i % approachCardStyles.length]
-                return (
-                  <Reveal key={item.title}>
-                    <motion.div
-                      className={cn(
-                        'flex h-full items-center gap-5 rounded-2xl p-7 transition duration-300 hover:-translate-y-1 sm:gap-6 sm:p-8',
-                        style.surface,
-                      )}
-                      whileHover={{ scale: 1.01 }}
-                      transition={{ duration: 0.3, ease: easeOut }}
-                    >
-                      <div
-                        className={cn(
-                          'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl',
-                          style.icon,
-                        )}
-                        aria-hidden
-                      >
-                        <Icon className="h-6 w-6" strokeWidth={1.65} />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-['Montserrat'] text-[17px] font-semibold tracking-[-0.02em] text-black sm:text-[18px]">
-                          {item.title}
-                        </h3>
-                        <p className="mt-3 text-pretty text-[14px] leading-relaxed text-black/70">{item.text}</p>
-                      </div>
-                    </motion.div>
-                  </Reveal>
-                )
-              })}
-            </div>
-          </Container>
-        </section>
-
-        <section id="processo" className={sectionPaddingYCompact}>
-          <Container>
-            <Reveal>
-              <h2 className="sr-only">Processo</h2>
-              <SectionHeading
-                eyebrow="PROCESSO"
-                subtitle="Um fluxo enxuto que se adapta ao tamanho do risco. Mais profundidade quando precisa, mais velocidade quando dá."
-                subtitleFullWidth
-              />
-            </Reveal>
-            <ProcessTimeline />
-          </Container>
-        </section>
-
-        <section
           id="contato"
           className={cn(
             'border-t border-black/[0.06] bg-gradient-to-b from-primary/[0.07] to-white',
@@ -958,9 +958,9 @@ function HomePage() {
               </p>
               <nav className="flex flex-wrap gap-1" aria-label="Rodapé">
                 <NavLink to="/#projetos">Projetos</NavLink>
-                <NavLink to="/#sobre">Sobre</NavLink>
                 <NavLink to="/#abordagem">Abordagem</NavLink>
                 <NavLink to="/#processo">Processo</NavLink>
+                <NavLink to="/#sobre">Sobre</NavLink>
                 <NavLink to="/#contato">Contato</NavLink>
               </nav>
             </footer>
